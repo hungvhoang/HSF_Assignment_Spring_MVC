@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://thymeleaf.org/">
   <head>
     <title>Carbook - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
@@ -27,7 +27,8 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    
+    	<!--  Test passing props -->
+    	<h1 th:text="${message}"></h1>
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
 	      <a class="navbar-brand" href="index.html">Car<span>Book</span></a>

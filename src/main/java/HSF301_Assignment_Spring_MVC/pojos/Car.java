@@ -53,6 +53,9 @@ public class Car {
     @Column(name = "Status", nullable = false)
     private String status;
     
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "CategoryID")
+    private Category categoryID;
     
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "car", orphanRemoval = true)
