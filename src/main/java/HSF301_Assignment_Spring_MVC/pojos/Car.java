@@ -56,7 +56,18 @@ public class Car {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CategoryID")
     private Category categoryID;
-    
+
+    @Column(name = "ImageLink")
+    private String imgLink;
+
+    @Column(name = "IsAvailable")
+    private boolean isAvailable;
+
+    @Column(name = "Transmission")
+    private boolean transmission;
+
+    @Column(name = "RatedStar")
+    private Integer ratedStar;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "car", orphanRemoval = true)
     private Set<CarRental> carRentalList = new HashSet<CarRental>();
