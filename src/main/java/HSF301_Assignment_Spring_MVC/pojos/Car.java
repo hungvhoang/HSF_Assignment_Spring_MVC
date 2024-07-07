@@ -49,8 +49,11 @@ public class Car {
     @Column(name = "RentPrice", nullable = false)
     private double rentPrice;
 
+    
     @Column(name = "Status", nullable = false)
     private String status;
+    
+    
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "car", orphanRemoval = true)
     private Set<CarRental> carRentalList = new HashSet<CarRental>();
