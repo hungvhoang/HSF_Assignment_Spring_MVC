@@ -95,19 +95,20 @@
                 </div>
             </div>
             <div class="col-md-8 block-9 mb-md-5">
-                <form action="#" class="bg-light p-5 contact-form">
+                <form th:action="@{/auth/login}" th:object="${loginRequest}" method="post" class="bg-light p-5 contact-form">
                     <div class="form-group">
                         <label>Enter your email: </label>
-                        <input type="text" class="form-control" placeholder="Email: ">
+                        <input th:field="*{username}" type="text" class="form-control" placeholder="Email: ">
                     </div>
                     <div class="form-group">
                         <label>Enter your password: </label>
-                        <input type="text" class="form-control" placeholder="Password">
+                        <input th:field="*{password}" type="text" class="form-control" placeholder="Password">
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Login" class="btn btn-primary py-3 px-5">
                     </div>
                 </form>
+                <h3 th:text="${loggingMessage}"></h3>
             </div>
         </div>
     </div>
