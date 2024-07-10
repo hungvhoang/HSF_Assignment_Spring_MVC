@@ -4,12 +4,12 @@
     <title>Carbook - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="css/animate.css">
-    
+
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
@@ -21,21 +21,21 @@
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
 
-    
+
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    
-	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+
+	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" th:id="'ftco-navbar'">
 	    <div class="container">
 	      <a class="navbar-brand" href="index.html">Car<span>Book</span></a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
 
-	      <div class="collapse navbar-collapse" id="ftco-nav">
+	      <div class="collapse navbar-collapse" th:id="'ftco-nav'">
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
 	          <li class="nav-item active"><a href="about.html" class="nav-link">About</a></li>
@@ -49,8 +49,8 @@
 	    </div>
 	  </nav>
     <!-- END nav -->
-    
-    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+
+    <section class="hero-wrap hero-wrap-2 js-fullheight" th:style="'background-image: url('images/bg_3.jpg');'" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
@@ -62,10 +62,302 @@
       </div>
     </section>
 
-    <section class="ftco-section ftco-about">
+    <section class="ftco-section ft">
+      <!DOCTYPE html>
+<html th:lang="en" xmlns:th="http://www.thymeleaf.org">
+      <head>
+          <title>Carbook - Free Bootstrap 4 Template by Colorlib</title>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+          <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+
+          <link rel="stylesheet" th:href="@{/css/open-iconic-bootstrap.min.css}">
+          <link rel="stylesheet" th:href="@{/css/animate.css}">
+          <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+          <link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+          <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+          <link rel="stylesheet" th:href="@{/css/aos.css}">
+          <link rel="stylesheet" th:href="@{/css/ionicons.min.css}">
+          <link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.css}">
+          <link rel="stylesheet" th:href="@{/css/jquery.timepicker.css}">
+          <link rel="stylesheet" th:href="@{/css/flaticon.css}">
+          <link rel="stylesheet" th:href="@{/css/icomoon.css}">
+          <link rel="stylesheet" th:href="@{/css/style.css}">
+      </head>
+      <body>
+
+      <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" th:id="'ftco-navbar'">
+          <div class="container">
+              <a class="navbar-brand" th:href="@{/index}">Car<span>Book</span></a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="oi oi-menu"></span> Menu
+              </button>
+
+              <div class="collapse navbar-collapse" th:id="'ftco-nav'">
+                  <ul class="navbar-nav ml-auto">
+                      <li class="nav-item"><a th:href="@{/index}" class="nav-link">Home</a></li>
+                      <li class="nav-item active"><a th:href="@{/about}" class="nav-link">About</a></li>
+                      <li class="nav-item"><a th:href="@{/services}" class="nav-link">Services</a></li>
+                      <li class="nav-item"><a th:href="@{/pricing}" class="nav-link">Pricing</a></li>
+                      <li class="nav-item"><a th:href="@{/car}" class="nav-link">Cars</a></li>
+                      <li class="nav-item"><a th:href="@{/blog}" class="nav-link">Blog</a></li>
+                      <li class="nav-item"><a th:href="@{/contact}" class="nav-link">Contact</a></li>
+                  </ul>
+              </div>
+          </div>
+      </nav>
+      <!-- END nav -->
+
+      <section class="hero-wrap hero-wrap-2 js-fullheight" th:style="'background-image: url(/images/bg_3.jpg);'" data-stellar-background-ratio="0.5">
+          <div class="overlay"></div>
+          <div class="container">
+              <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+                  <div class="col-md-9 ftco-animate pb-5">
+                      <p class="breadcrumbs"><span class="mr-2"><a th:href="@{/index}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>About us <i class="ion-ios-arrow-forward"></i></span></p>
+                      <h1 class="mb-3 bread">About Us</h1>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section class="ftco-section ftco-about">
+          <div class="container">
+              <div class="row no-gutters">
+                  <div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center" th:style="'background-image: url(/images/about.jpg);'">
+                  </div>
+                  <div class="col-md-6 wrap-about ftco-animate">
+                      <div class="heading-section heading-section-white pl-md-5">
+                          <span class="subheading">About us</span>
+                          <h2 class="mb-4">Welcome to Carbook</h2>
+
+                          <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                          <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                          <p><a href="#" class="btn btn-primary py-3 px-4">Search Vehicle</a></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section class="ftco-section ftco-intro" th:style="'background-image: url(/images/bg_3.jpg);'">
+          <div class="overlay"></div>
+          <div class="container">
+              <div class="row justify-content-end">
+                  <div class="col-md-6 heading-section heading-section-white ftco-animate">
+                      <h2 class="mb-3">Do You Want To Earn With Us? So Don't Be Late.</h2>
+                      <a href="#" class="btn btn-primary btn-lg">Become A Driver</a>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+
+      <section class="ftco-section testimony-section bg-light">
+          <div class="container">
+              <div class="row justify-content-center mb-5">
+                  <div class="col-md-7 text-center heading-section ftco-animate">
+                      <span class="subheading">Testimonial</span>
+                      <h2 class="mb-3">Happy Clients</h2>
+                  </div>
+              </div>
+              <div class="row ftco-animate">
+                  <div class="col-md-12">
+                      <div class="carousel-testimony owl-carousel ftco-owl">
+                          <div class="item" th:each="testimonial : ${testimonials}">
+                              <div class="testimony-wrap rounded text-center py-4 pb-5">
+                                  <div class="user-img mb-2" th:style="'background-image: url(/images/person_' + ${testimonial.id} + '.jpg);'"></div>
+                                  <div class="text pt-4">
+                                      <p class="mb-4" th:text="${testimonial.message}">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                                      <p class="name" th:text="${testimonial.name}">Roger Scott</p>
+                                      <span class="position" th:text="${testimonial.position}">Marketing Manager</span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section class="ftco-counter ftco-section img" th:id="'section-counter'">
+          <div class="overlay"></div>
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
+                      <div class="block-18">
+                          <div class="text text-border d-flex align-items-center">
+                              <strong class="number" data-number="60" th:text="${yearsExperience}">0</strong>
+                              <span>Year <br>Experienced</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
+                      <div class="block-18">
+                          <div class="text text-border d-flex align-items-center">
+                              <strong class="number" data-number="1090" th:text="${totalCars}">0</strong>
+                              <span>Total <br>Cars</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
+                      <div class="block-18">
+                          <div class="text text-border d-flex align-items-center">
+                              <strong class="number" data-number="2590" th:text="${happyCustomers}">0</strong>
+                              <span>Happy <br>Customers</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6 col-lg-3 justify-content-center counter-wrap ftco-animate">
+                      <div class="block-18">
+                          <div class="text d-flex align-items-center">
+                              <strong class="number" data-number="67" th:text="${awardsWon}">0</strong>
+                              <span>Awards <br>Won</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section class="ftco-section ftco-consult ftco-no-pt ftco-no-pb" th:style="'background-image: url(/images/bg_4.jpg);'">
+          <div class="overlay"></div>
+          <div class="container">
+              <div class="row justify-content-end">
+                  <div class="col-md-6 py-5 px-md-5">
+                      <div class="py-md-5">
+                          <div class="heading-section heading-section-white ftco-animate mb-5">
+                              <h2 class="mb-4">Contact Us</h2>
+                              <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                          </div>
+                          <form action="#" class="appointment-form ftco-animate">
+                              <div class="d-md-flex">
+                                  <div class="form-group">
+                                      <input type="text" class="form-control" placeholder="Name">
+                                  </div>
+                                  <div class="form-group ml-md-4">
+                                      <input type="text" class="form-control" placeholder="Email">
+                                  </div>
+                              </div>
+                              <div class="d-md-flex">
+                                  <div class="form-group">
+                                      <div class="form-field">
+                                          <div class="select-wrap">
+                                              <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                              <select name="" th:id="" class="form-control">
+                                                  <option value="">Select Your Services</option>
+                                                  <option value="">Car Repair</option>
+                                                  <option value="">Car Wash</option>
+                                                  <option value="">Car Rent</option>
+                                                  <option value="">Others</option>
+                                              </select>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="form-group ml-md-4">
+                                      <input type="text" class="form-control" placeholder="Phone">
+                                  </div>
+                              </div>
+                              <div class="form-group">
+                                  <textarea name="" th:id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                              </div>
+                              <div class="form-group">
+                                  <input type="submit" value="Send message" class="btn btn-primary py-3 px-4">
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <footer class="ftco-footer ftco-bg-dark ftco-section">
+          <div class="container">
+              <div class="row mb-5">
+                  <div class="col-md">
+                      <div class="ftco-footer-widget mb-4">
+                          <h2 class="ftco-heading-2">Carbook</h2>
+                          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                          <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div class="col-md">
+                      <div class="ftco-footer-widget mb-4 ml-md-5">
+                          <h2 class="ftco-heading-2">Information</h2>
+                          <ul class="list-unstyled">
+                              <li><a th:href="@{/about}" class="py-2 d-block">About</a></li>
+                              <li><a th:href="@{/services}" class="py-2 d-block">Services</a></li>
+                              <li><a th:href="@{/terms}" class="py-2 d-block">Terms and Conditions</a></li>
+                              <li><a th:href="@{/bestprice}" class="py-2 d-block">Best Price Guarantee</a></li>
+                              <li><a th:href="@{/privacy}" class="py-2 d-block">Privacy &amp; Cookies Policy</a></li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div class="col-md">
+                      <div class="ftco-footer-widget mb-4">
+                          <h2 class="ftco-heading-2">Customer Support</h2>
+                          <ul class="list-unstyled">
+                              <li><a th:href="@{/faq}" class="py-2 d-block">FAQ</a></li>
+                              <li><a th:href="@{/paymentoptions}" class="py-2 d-block">Payment Options</a></li>
+                              <li><a th:href="@{/bookingtips}" class="py-2 d-block">Booking Tips</a></li>
+                              <li><a th:href="@{/howitworks}" class="py-2 d-block">How it works</a></li>
+                              <li><a th:href="@{/contact}" class="py-2 d-block">Contact Us</a></li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div class="col-md">
+                      <div class="ftco-footer-widget mb-4">
+                          <h2 class="ftco-heading-2">Have a Questions?</h2>
+                          <div class="block-23 mb-3">
+                              <ul>
+                                  <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
+                                  <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                                  <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-12 text-center">
+
+                      <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                          Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
+                          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                  </div>
+              </div>
+          </div>
+      </footer>
+
+      <div th:th:id="'ftco-loader'" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+      <script th:src="@{/js/jquery.min.js}"></script>
+      <script th:src="@{/js/jquery-migrate-3.0.1.min.js}"></script>
+      <script th:src="@{/js/popper.min.js}"></script>
+      <script th:src="@{/js/bootstrap.min.js}"></script>
+      <script th:src="@{/js/jquery.easing.1.3.js}"></script>
+      <script th:src="@{/js/jquery.waypoints.min.js}"></script>
+      <script th:src="@{/js/jquery.stellar.min.js}"></script>
+      <script th:src="@{/js/owl.carousel.min.js}"></script>
+      <script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+      <script th:src="@{/js/aos.js}"></script>
+      <script th:src="@{/js/jquery.animateNumber.min.js}"></script>
+      <script th:src="@{/js/bootstrap-datepicker.js}"></script>
+      <script th:src="@{/js/jquery.timepicker.min.js}"></script>
+      <script th:src="@{/js/scrollax.min.js}"></script>
+      <script th:src="@{/js/main.js}"></script>
+
+      </body>
+</html>
+co-about">
 			<div class="container">
 				<div class="row no-gutters">
-					<div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/about.jpg);">
+					<div class="col-md-6 p-md-5 img img-2 d-flex justify-content-center align-items-center" th:style="'background-image: url(images/about.jpg);'">
 					</div>
 					<div class="col-md-6 wrap-about ftco-animate">
 	          <div class="heading-section heading-section-white pl-md-5">
@@ -81,7 +373,7 @@
 			</div>
 		</section>
 
-		<section class="ftco-section ftco-intro" style="background-image: url(images/bg_3.jpg);">
+		<section class="ftco-section ftco-intro" th:style="'background-image: url(images/bg_3.jpg);'">
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row justify-content-end">
@@ -107,7 +399,7 @@
             <div class="carousel-testimony owl-carousel ftco-owl">
               <div class="item">
                 <div class="testimony-wrap rounded text-center py-4 pb-5">
-                  <div class="user-img mb-2" style="background-image: url(images/person_1.jpg)">
+                  <div class="user-img mb-2" th:style="'background-image: url(images/person_1.jpg)'">
                   </div>
                   <div class="text pt-4">
                     <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
@@ -118,7 +410,7 @@
               </div>
               <div class="item">
                 <div class="testimony-wrap rounded text-center py-4 pb-5">
-                  <div class="user-img mb-2" style="background-image: url(images/person_2.jpg)">
+                  <div class="user-img mb-2" th:style="'background-image: url(images/person_2.jpg)'">
                   </div>
                   <div class="text pt-4">
                     <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
@@ -129,7 +421,7 @@
               </div>
               <div class="item">
                 <div class="testimony-wrap rounded text-center py-4 pb-5">
-                  <div class="user-img mb-2" style="background-image: url(images/person_3.jpg)">
+                  <div class="user-img mb-2" th:style="'background-image: url(images/person_3.jpg)'">
                   </div>
                   <div class="text pt-4">
                     <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
@@ -140,7 +432,7 @@
               </div>
               <div class="item">
                 <div class="testimony-wrap rounded text-center py-4 pb-5">
-                  <div class="user-img mb-2" style="background-image: url(images/person_1.jpg)">
+                  <div class="user-img mb-2" th:style="'background-image: url(images/person_1.jpg)'">
                   </div>
                   <div class="text pt-4">
                     <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
@@ -151,7 +443,7 @@
               </div>
               <div class="item">
                 <div class="testimony-wrap rounded text-center py-4 pb-5">
-                  <div class="user-img mb-2" style="background-image: url(images/person_1.jpg)">
+                  <div class="user-img mb-2" th:style="'background-image: url(images/person_1.jpg)'">
                   </div>
                   <div class="text pt-4">
                     <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
@@ -166,7 +458,7 @@
       </div>
     </section>
 
-    <section class="ftco-counter ftco-section img" id="section-counter">
+    <section class="ftco-counter ftco-section img" th:id="'section-counter'">
 			<div class="overlay"></div>
     	<div class="container">
     		<div class="row">
@@ -204,7 +496,7 @@
           </div>
         </div>
     	</div>
-    </section>	
+    </section>
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">
@@ -267,11 +559,11 @@
         </div>
       </div>
     </footer>
-    
-  
+
+
 
   <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+  <div th:id="'ftco-loader'" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
   <script src="js/jquery.min.js"></script>
@@ -291,6 +583,6 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-    
+
   </body>
 </html>
