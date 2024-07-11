@@ -23,5 +23,31 @@ public class HomeController {
 //        model.addAttribute()
         return "about";
     }
+
+    @GetMapping({"/home"})
+    public String homeView(Model model){
+        return "index";
+    }
+
+    @GetMapping({"/car"})
+    public String carView(Model model){
+        return "car";
+    }
+
+    @GetMapping({"/carDetail"})
+    public String carDetailView(Model model){
+        return "car-single";
+    }
+
+    @GetMapping({"/pricing"})
+    public String pricingView(Model model){
+        return "pricing";
+    }
+
+    @GetMapping({"/blog"}) //Lam` canh?
+    public String blogView(Model model){
+        return "blog";
+    }
+
     
 }
