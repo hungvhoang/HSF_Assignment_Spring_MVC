@@ -11,4 +11,5 @@ public interface ICustomerService {
     public List<Customer> getAll();
     public Customer findByID(int id);
     public Customer login(String email, String password);
+    public List<Customer> getByAccountRole (String role);
 }

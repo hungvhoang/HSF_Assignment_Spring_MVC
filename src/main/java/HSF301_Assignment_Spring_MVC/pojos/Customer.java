@@ -12,7 +12,8 @@ import java.util.Date;
 
 @Entity
 @Table(name = "CUSTOMERS")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = {"account"})

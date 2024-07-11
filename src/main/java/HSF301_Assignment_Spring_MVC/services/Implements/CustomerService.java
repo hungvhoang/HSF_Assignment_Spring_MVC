@@ -43,4 +43,11 @@ public class CustomerService implements ICustomerService {
     public Customer login(String email, String password) {
         return customerRepository.findByEmailAndPassword(email, password);
     }
+
+    @Override
+    public List<Customer> getByAccountRole(String role) {
+        return customerRepository.getByAccountRole(role);
+    }
+
+
 }

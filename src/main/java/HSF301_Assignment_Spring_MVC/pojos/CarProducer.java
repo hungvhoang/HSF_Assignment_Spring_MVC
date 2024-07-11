@@ -9,10 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Table;
 import java.util.HashSet;
@@ -20,7 +17,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "CAR_PRODUCERS")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = {"car"})

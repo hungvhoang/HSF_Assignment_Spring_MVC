@@ -9,16 +9,16 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.util.Date;
 
 @Entity
 @Table(name = "CAR_RENTAL")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 public class CarRental {
     @EmbeddedId
     private CarRentalKey id;
