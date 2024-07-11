@@ -1,17 +1,40 @@
 package HSF301_Assignment_Spring_MVC.controllers;
 
+import HSF301_Assignment_Spring_MVC.pojos.Car;
 import HSF301_Assignment_Spring_MVC.pojos.request.LoginRequest;
+import HSF301_Assignment_Spring_MVC.services.ICarService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/")
 public class HomeController {
+    private ICarService iCarService;
 
-    @GetMapping({"/","/login"})
+    @Autowired
+    public HomeController(ICarService iCarService) {
+        this.iCarService = iCarService;
+    }
+
+    @GetMapping()
+    public String defaultRoot() {
+        return "redirect:/index";
+    }
+
+    @GetMapping("/index")
+    public String defaultScreen(Model model){
+        List<Car> carList = iCarService.getAll();
+        model.addAttribute("cars",carList);
+        return "index";
+    }
+
+    @GetMapping({"/login"})
     public String loginView(Model model) {
     	//Test passing props
         model.addAttribute("loginRequest", new LoginRequest());

@@ -1,10 +1,7 @@
 package HSF301_Assignment_Spring_MVC.pojos;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 
 import java.util.Date;
@@ -13,7 +10,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "CARS")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = {"producer","carRentalList","carReviewList"})

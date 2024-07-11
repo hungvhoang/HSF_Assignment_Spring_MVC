@@ -43,22 +43,24 @@
 								<table class="table mb-0">
 									<thead>
 									<tr>
-										<th scope="col">EMPLOYEES</th>
-										<th scope="col">POSITION</th>
-										<th scope="col">CONTACTS</th>
-										<th scope="col">AGE</th>
-										<th scope="col">ADDRESS</th>
-										<th scope="col">SALARY</th>
+										<th scope="col">Car</th>
+										<th scope="col">Customer</th>
+										<th scope="col">Customer Name</th>
+										<th scope="col">Rent price</th>
+										<th scope="col">Status</th>
+										<th scope="col">Pickup date</th>
+										<th scope="col">Return date</th>
 									</tr>
 									</thead>
 									<tbody>
-									<tr th:each="employee : ${employees}">
-										<th scope="row" style="color: #666666;" th:text="${employee.name}">Tiger Nixon</th>
-										<td th:text="${employee.position}">System Architect</td>
-										<td th:text="${employee.email}">tnixon12@example.com</td>
-										<td th:text="${employee.age}">61</td>
-										<td th:text="${employee.address}">Edinburgh</td>
-										<td th:text="${employee.salary}">$320,800</td>
+									<tr th:each="carRental : ${carRentalList}">
+										<th scope="row" th:style="'color: #666666;'" th:text="${carRental.car.carName}"></th>
+										<td th:text="${carRental.customer.CustomerID}"></td>
+										<td th:text="${carRental.customer.customerName}"></td>
+										<td th:text="${carRental.rentPrice}"></td>
+										<td th:text="${carRental.status}"></td>
+										<td th:text="${carRental.pickupDate}"></td>
+										<td th:text="${carRental.returnDate}"></td>
 									</tr>
 									</tbody>
 								</table>

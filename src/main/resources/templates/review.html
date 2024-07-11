@@ -44,22 +44,20 @@
 								<table class="table mb-0">
 									<thead>
 									<tr>
-										<th scope="col">EMPLOYEES</th>
-										<th scope="col">POSITION</th>
-										<th scope="col">CONTACTS</th>
-										<th scope="col">AGE</th>
-										<th scope="col">ADDRESS</th>
-										<th scope="col">SALARY</th>
+										<th scope="col">Customer</th>
+										<th scope="col">Customer Name</th>
+										<th scope="col">Car</th>
+										<th scope="col">Review Star</th>
+										<th scope="col">Comment</th>
 									</tr>
 									</thead>
 									<tbody>
-									<tr th:each="employee : ${employees}">
-										<th scope="row" style="color: #666666;" th:text="${employee.name}">Tiger Nixon</th>
-										<td th:text="${employee.position}">System Architect</td>
-										<td th:text="${employee.email}">tnixon12@example.com</td>
-										<td th:text="${employee.age}">61</td>
-										<td th:text="${employee.address}">Edinburgh</td>
-										<td th:text="${employee.salary}">$320,800</td>
+									<tr th:each="review : ${review}">
+										<th scope="row" th:style="'color: #666666;'" th:text="${review.customer.customerID}"></th>
+										<td th:text="${review.customer.customerName}"></td>
+										<td th:text="${review.car.carName}"></td>
+										<td th:text="${review.reviewStar}"></td>
+										<td th:text="${review.comment}"></td>
 									</tr>
 									</tbody>
 								</table>

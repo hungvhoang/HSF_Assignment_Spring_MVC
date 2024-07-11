@@ -44,22 +44,27 @@
 								<table class="table mb-0">
 									<thead>
 									<tr>
-										<th scope="col">EMPLOYEES</th>
-										<th scope="col">POSITION</th>
-										<th scope="col">CONTACTS</th>
-										<th scope="col">AGE</th>
-										<th scope="col">ADDRESS</th>
-										<th scope="col">SALARY</th>
+										<th scope="col">Car ID</th>
+										<th scope="col">Car Name</th>
+										<th scope="col">Category</th>
+										<th scope="col">Model Year</th>
+										<th scope="col">Capacity</th>
+										<th scope="col">Rent Price</th>
+										<th scope="col">Transmission</th>
+										<th scope="col">Status</th>
+										<th scope="col">Action</th>
 									</tr>
 									</thead>
 									<tbody>
-									<tr th:each="employee : ${employees}">
-										<th scope="row" style="color: #666666;" th:text="${employee.name}">Tiger Nixon</th>
-										<td th:text="${employee.position}">System Architect</td>
-										<td th:text="${employee.email}">tnixon12@example.com</td>
-										<td th:text="${employee.age}">61</td>
-										<td th:text="${employee.address}">Edinburgh</td>
-										<td th:text="${employee.salary}">$320,800</td>
+									<tr th:each="car : ${listCar}">
+										<th scope="row" style="color: #666666;" th:text="${car.carId}"></th>
+										<td th:text="${car.carName}"></td>
+										<td th:text="${car.categoryID.categoryName}"></td>
+										<td th:text="${car.carModelYear}"></td>
+										<td th:text="${car.capacity}"></td>
+										<td th:text="${car.rentPrice}"></td>
+										<td th:text="${car.transmission}"></td>
+										<td th:text="${car.status}"></td>
 									</tr>
 									</tbody>
 								</table>
