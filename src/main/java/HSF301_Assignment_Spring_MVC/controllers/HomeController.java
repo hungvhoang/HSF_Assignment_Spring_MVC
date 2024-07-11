@@ -54,12 +54,19 @@ public class HomeController {
 
     @GetMapping({"/car"})
     public String carView(Model model){
+        List<Car> carList = iCarService.getAll();
+        model.addAttribute("cars",carList);
         return "car";
     }
 
     @GetMapping({"/carDetail"})
     public String carDetailView(Model model){
         return "car-single";
+    }
+
+    @GetMapping({"/carRental"})
+    public String carRentalView(Model model){
+        return "carRental";
     }
 
     @GetMapping({"/pricing"})
