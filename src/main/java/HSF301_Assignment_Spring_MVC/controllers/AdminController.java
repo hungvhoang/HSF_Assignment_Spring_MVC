@@ -59,7 +59,7 @@ public class AdminController {
     @GetMapping("/review")
     public String getReview(Model model){
         List<Review> reviews = iReviewService.getAll();
-        model.addAttribute("review",reviews);
+        model.addAttribute("review", reviews);
         return "review";
     }
 }

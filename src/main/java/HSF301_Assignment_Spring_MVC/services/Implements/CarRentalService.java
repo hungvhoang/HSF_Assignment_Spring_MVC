@@ -6,6 +6,7 @@ import HSF301_Assignment_Spring_MVC.repositories.CarRentalRepository;
 import HSF301_Assignment_Spring_MVC.services.ICarRentalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,8 +22,9 @@ public class CarRentalService implements ICarRentalService {
     }
 
     @Override
-    public void update(CarRental carRental) {
-        carRentalRepository.save(carRental);
+    @Transactional
+    public CarRental update(CarRental carRental) {
+        return carRentalRepository.save(carRental);
     }
 
     @Override

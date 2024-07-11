@@ -1,25 +1,29 @@
 package HSF301_Assignment_Spring_MVC.controllers;
 
 import HSF301_Assignment_Spring_MVC.pojos.Car;
+import HSF301_Assignment_Spring_MVC.pojos.CarRental;
+import HSF301_Assignment_Spring_MVC.pojos.request.CarRentalRequest;
 import HSF301_Assignment_Spring_MVC.pojos.request.LoginRequest;
+import HSF301_Assignment_Spring_MVC.services.ICarRentalService;
 import HSF301_Assignment_Spring_MVC.services.ICarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
 @RequestMapping("/")
 public class HomeController {
-    private ICarService iCarService;
+    private final ICarService iCarService;
+    private final ICarRentalService iCarRentalService;
 
     @Autowired
-    public HomeController(ICarService iCarService) {
+    public HomeController(ICarService iCarService, ICarRentalService iCarRentalService) {
         this.iCarService = iCarService;
+        this.iCarRentalService = iCarRentalService;
     }
 
     @GetMapping()
@@ -59,15 +63,19 @@ public class HomeController {
         return "car";
     }
 
-    @GetMapping({"/carDetail"})
-    public String carDetailView(Model model){
+    @GetMapping({"/carDetail/{id}"})
+    public String carDetailView(Model model, @PathVariable int id){
+        Car car = iCarService.findByID(id);
+        model.addAttribute("car",car);
         return "car-single";
     }
 
-    @GetMapping({"/carRental"})
-    public String carRentalView(Model model){
-        return "carRental";
-    }
+//    @GetMapping({"/carDetail"})
+//    public String carDetaView(Model model){
+////        Car car = iCarService.findByID(id);
+////        model.addAttribute("car",car);
+//        return "car-single";
+//    }
 
     @GetMapping({"/pricing"})
     public String pricingView(Model model){
@@ -79,5 +87,23 @@ public class HomeController {
         return "blog";
     }
 
+    @PostMapping({"/customer/rent-car"})
+    public String userRentCar(Model model, @ModelAttribute CarRentalRequest crr){
+        // Get list for render
+
+//        CarRental carRental = iCarRentalService.update(cr);
+        CarRental carRental = null;
+
+
+//        if(carRental == null){
+//            System.out.println("NULL CAR-RENTAL");
+            model.addAttribute("err", "CarRental Not Found");
+            List<Car> carList = iCarService.getAll();
+            model.addAttribute("cars",carList);
+//        }else{
+//            model.addAttribute("carRental", carRental);
+//        }
+        return "car";
+    }
     
 }
