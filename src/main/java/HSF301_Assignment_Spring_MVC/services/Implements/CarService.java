@@ -25,13 +25,18 @@ public class CarService implements ICarService {
     }
 
     @Override
-    public void delete(int id) {
+    public void deleteById(int id) {
         carRepository.deleteById(id);
     }
 
     @Override
     public List<Car> getAll() {
         return carRepository.findAll();
+    }
+
+    @Override
+    public void delete(Car car){
+        carRepository.delete(car);
     }
 
     @Override

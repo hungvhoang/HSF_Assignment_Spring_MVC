@@ -2,6 +2,7 @@ package HSF301_Assignment_Spring_MVC.pojos;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 import java.util.Date;
@@ -36,6 +37,7 @@ public class Car {
     @Column(name = "Description")
     private String description;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "ImportDate", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date importDate;
