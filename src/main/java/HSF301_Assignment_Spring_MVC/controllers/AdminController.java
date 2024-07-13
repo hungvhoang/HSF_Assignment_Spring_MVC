@@ -70,15 +70,7 @@ public class AdminController {
             @RequestParam(value ="id", required = false, defaultValue = "0") int id){
         if(id!= 0){
             try {
-                System.out.println("Attempting to delete car with ID: " + id);
-                Account account = iAccountService.findByID(id);
-                System.out.println("Account: "+ account);
-                account.setCustomer(null);
-                Customer customer = iCustomerService.findByID(id);
-                System.out.println("Customer: "+customer);
-                customer.setAccount(null);
                 iCustomerService.delete(Integer.valueOf(id));
-                System.out.println("Delete customer successfully");
                 model.addAttribute("notification","Delete customer successfully !");
             }catch (Exception ex){
                 System.out.println("Error: "+ex.getMessage());

@@ -39,7 +39,12 @@
 										<td th:text="${customer.email}">tnixon12@example.com</td>
 										<td th:text="${customer.identityCard}"></td>
 										<td th:text="${customer.mobile}"></td>
-										<td><a th:href="@{/admin/customer(id=${customer.customerID})}"  class="btn btn-danger mt-3 mb-3">Delete car</a>
+										<td>
+											<form th:action="@{/admin/customer}" method="post">
+												<input type="hidden" name="id" th:value="${customer.customerID}"/>
+												<button type="submit" class="btn btn-danger mt-3 mb-3">Delete customer</button>
+											</form>
+										</td>
 									</tr>
 									</tbody>
 								</table>

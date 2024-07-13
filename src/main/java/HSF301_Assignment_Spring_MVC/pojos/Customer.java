@@ -9,6 +9,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "CUSTOMERS")
@@ -52,6 +54,10 @@ public class Customer {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "AccountID")
     private Account account;
-    
-    
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", orphanRemoval = true)
+    private Set<CarRental> carRentalList = new HashSet<CarRental>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", orphanRemoval = true)
+    private Set<Review> carReviewList = new HashSet<Review>();
 }
