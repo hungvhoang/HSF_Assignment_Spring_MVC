@@ -2,6 +2,7 @@ package HSF301_Assignment_Spring_MVC.controllers;
 
 import HSF301_Assignment_Spring_MVC.pojos.Car;
 import HSF301_Assignment_Spring_MVC.pojos.CarRental;
+import HSF301_Assignment_Spring_MVC.pojos.Customer;
 import HSF301_Assignment_Spring_MVC.pojos.request.CarRentalRequest;
 import HSF301_Assignment_Spring_MVC.pojos.request.LoginRequest;
 import HSF301_Assignment_Spring_MVC.services.ICarRentalService;
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -28,7 +31,7 @@ public class HomeController {
 
     @GetMapping()
     public String defaultRoot() {
-        return "redirect:/index";
+        return "redirect:/login";
     }
 
     @GetMapping("/index")
@@ -88,22 +91,24 @@ public class HomeController {
     }
 
     @PostMapping({"/customer/rent-car"})
-    public String userRentCar(Model model, @ModelAttribute CarRentalRequest crr){
+    public String userRentCar(@ModelAttribute CarRental carRental, Model model, RedirectAttributes redirectAttributes){
         // Get list for render
-
-//        CarRental carRental = iCarRentalService.update(cr);
-        CarRental carRental = null;
+//        Customer cus, Car car, Date pickupDate, Date returnDate, double rentPrice, String status
+        System.out.println("carRental: "+ carRental.toString());
+        CarRental cr = new CarRental();
+//        CarRental carRental = iCarRentalService.update();
 
 
 //        if(carRental == null){
 //            System.out.println("NULL CAR-RENTAL");
-            model.addAttribute("err", "CarRental Not Found");
-            List<Car> carList = iCarService.getAll();
-            model.addAttribute("cars",carList);
+        List<Car> carList = iCarService.getAll();
+//        model.addAttribute("cars",carList);
+//            model.addAttribute("err", "CarRental Not Found");
+        redirectAttributes.addFlashAttribute("err", "CarRental Not Found");
 //        }else{
 //            model.addAttribute("carRental", carRental);
 //        }
-        return "car";
+        return "redirect:/car";
     }
     
 }
