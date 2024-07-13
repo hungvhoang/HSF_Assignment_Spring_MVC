@@ -30,7 +30,15 @@ public class AdminController {
     }
 
     @GetMapping("/carAdmin")
-    public String getCars(Model model ,@RequestParam(value ="id", required = false, defaultValue = "0") int id){
+    public String getCars(Model model){
+        List<Car> carList = iCarService.getAll();
+        model.addAttribute("listCar",carList);
+        return "carAdmin";
+    }
+
+
+    @PostMapping("/carAdmin")
+    public String removeCars(Model model ,@RequestParam(value ="id", required = false, defaultValue = "0") int id){
         if(id!= 0){
             try {
                 System.out.println("Attempting to delete car with ID: " + id);
@@ -50,6 +58,16 @@ public class AdminController {
 
     @GetMapping("/customer")
     public String getCustomer(Model model,@RequestParam(value ="id", required = false, defaultValue = "0") int id){
+        List<Customer> customerList = iCustomerService.getByAccountRole("Customer");
+        model.addAttribute("customer",customerList);
+        return "customer";
+    }
+
+
+    @PostMapping("/customer")
+    public String removeCustomer(
+            Model model,
+            @RequestParam(value ="id", required = false, defaultValue = "0") int id){
         if(id!= 0){
             try {
                 System.out.println("Attempting to delete car with ID: " + id);

@@ -51,7 +51,11 @@
 										<td th:text="${car.transmission}"></td>
 										<td th:text="${car.status}"></td>
 										<td><a th:href="@{/admin/updateCar(id=${car.carId})}"  class="btn btn-secondary mt-3 mb-3">Update car</a>
-										<td><a th:href="@{/admin/carAdmin(id=${car.carId})}"  class="btn btn-danger mt-3 mb-3">Delete car</a>
+										<td>
+											<form th:action="@{/admin/carAdmin}" method="post">
+												<input type="hidden" name="id" th:value="${car.carId}"/>
+												<button type="submit" class="btn btn-danger mt-3 mb-3">Delete car</button>
+											</form>
 										</td>
 									</tr>
 									</tbody>

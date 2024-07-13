@@ -1,15 +1,26 @@
 package HSF301_Assignment_Spring_MVC.services.Implements;
 
 import HSF301_Assignment_Spring_MVC.pojos.Car;
+import HSF301_Assignment_Spring_MVC.pojos.CarProducer;
+import HSF301_Assignment_Spring_MVC.pojos.Category;
+import HSF301_Assignment_Spring_MVC.repositories.CarProducerRepository;
 import HSF301_Assignment_Spring_MVC.repositories.CarRepository;
+import HSF301_Assignment_Spring_MVC.repositories.CategoryRepository;
 import HSF301_Assignment_Spring_MVC.services.ICarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CarService implements ICarService {
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
+    private CarProducerRepository carProducerRepository;
 
     @Autowired
     private CarRepository carRepository;
@@ -36,6 +47,16 @@ public class CarService implements ICarService {
 
     @Override
     public void delete(Car car){
+        Category category = car.getCategoryID();
+        Set<Car> carsCate = category.getCarList();
+        carsCate.remove(car);
+        categoryRepository.save(category);
+
+        CarProducer carProducer = car.getProducer();
+        Set<Car> carsPro = carProducer.getCar();
+        carsPro.remove(car);
+        carProducerRepository.save(carProducer);
+
         carRepository.delete(car);
     }
 
