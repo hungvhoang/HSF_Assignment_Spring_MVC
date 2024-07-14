@@ -26,24 +26,24 @@
                                     <tr>
                                         <th scope="col">Car ID</th>
                                         <th scope="col">Car Name</th>
-                                        <th scope="col">Rent price</th>
-                                        <th scope="col">Pickup date</th>
-                                        <th scope="col">Return date</th>
+                                        <th scope="col">Rent Price</th>
+                                        <th scope="col">Pickup Date</th>
+                                        <th scope="col">Return Date</th>
                                         <th scope="col">Status</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="carRented : ${carRented}">
-                                        <th scope="row" th:style="'color: #666666;'" th:text="${carRented.CarID}"></th>
-                                        <td th:text="${carRented.}"></td>
-                                        <td th:text="${carRental.customer.customerName}"></td>
+                                    <tr th:each="carRental : ${carRented}">
+                                        <td th:text="${carRental.car.carId}"></td>
+                                        <td th:text="${carRental.car.carName}"></td>
                                         <td th:text="${carRental.rentPrice}"></td>
-                                        <td th:text="${carRental.status}"></td>
                                         <td th:text="${carRental.pickupDate}"></td>
                                         <td th:text="${carRental.returnDate}"></td>
+                                        <td th:text="${carRental.status}"></td>
                                     </tr>
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
                     </div>

@@ -18,7 +18,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"account"})
+@ToString(exclude = {"account","carRentalList","carReviewList"})
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
