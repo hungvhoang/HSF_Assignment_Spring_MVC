@@ -10,6 +10,8 @@ import java.util.Date;
 
 @Data
 public class CarRentalRequest {
+    private int carId;
+    private int customerId;
     private Car car;
     private Customer customer;
     private int carModelYear;

@@ -129,19 +129,25 @@ public class HomeController {
         Customer customer = (Customer) session.getAttribute("user");
         model.addAttribute("car", car);
         model.addAttribute("customer", customer);
-        model.addAttribute("carRental", new CarRental());
+        CarRental carRental = new CarRental();
+        carRental.setCar(car);
+        carRental.setCustomer(customer);
+        model.addAttribute("carRental",carRental);
         return "customerBookCar";
     }
 
     @PostMapping({"/customer/rent-car"})
-    public String userRentCar(@ModelAttribute CarRental carRental, Model model, RedirectAttributes redirectAttributes, HttpServletRequest request){
-
+    public String userRentCar(@ModelAttribute CarRentalRequest carRental, Model model, RedirectAttributes redirectAttributes, HttpServletRequest request){
         HttpSession session = request.getSession();
         Customer cus = (Customer) session.getAttribute("user");
         if( cus == null){
             redirectAttributes.addFlashAttribute("err", "Please sign in to continue");
         }else {
-           iCarRentalService.update(carRental);
+            CarRental entity = carRental.toCarRental();
+            double price = (entity.getReturnDate().getTime() - entity.getPickupDate().getTime())* entity.getCar().getRentPrice();
+            entity.setStatus("ok");
+            entity.setRentPrice(price);
+           iCarRentalService.update(entity);
             redirectAttributes.addFlashAttribute("err", "Add CarRental Successfully");
         }
 
