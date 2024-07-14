@@ -92,6 +92,7 @@ public class HomeController {
     public String carView(Model model){
         List<Car> carList = iCarService.getAll();
         model.addAttribute("cars",carList);
+        model.addAttribute("carRental", new CarRental());
         return "car";
     }
 
@@ -118,6 +119,19 @@ public class HomeController {
 //    public String blogView(Model model){
 //        return "blog";
 //    }
+
+    @GetMapping("/car/book/{carId}")
+    public String selectedCar (Model model,
+            @PathVariable int carId
+            ,HttpServletRequest request) {
+        Car car = iCarService.findByID(carId);
+        HttpSession session = request.getSession();
+        Customer customer = (Customer) session.getAttribute("user");
+        model.addAttribute("car", car);
+        model.addAttribute("customer", customer);
+        model.addAttribute("carRental", new CarRental());
+        return "customerBookCar";
+    }
 
     @PostMapping({"/customer/rent-car"})
     public String userRentCar(@ModelAttribute CarRental carRental, Model model, RedirectAttributes redirectAttributes, HttpServletRequest request){
