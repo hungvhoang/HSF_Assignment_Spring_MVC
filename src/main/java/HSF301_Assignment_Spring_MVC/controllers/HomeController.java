@@ -11,12 +11,15 @@ import HSF301_Assignment_Spring_MVC.services.ICustomerService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +42,13 @@ public class HomeController {
         return "redirect:/login";
     }
 
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
+
 //    @GetMapping("/index")
 //    public String defaultScreen(Model model){
 //        List<Car> carList = iCarService.getAll();
@@ -54,11 +64,16 @@ public class HomeController {
     }
 
     @GetMapping("/carRented")
-    public String showCarRented(HttpServletRequest request,Model model){
+    public String showCarRented(HttpServletRequest request, Model model){
         HttpSession session = request.getSession();
         Customer customer =(Customer) session.getAttribute("user");
-        List<CarRental> ds = customer.getCarRentalList().stream().toList();
-        model.addAttribute("carRented",ds);
+        if(customer != null){
+            List<CarRental> ds = customer.getCarRentalList().stream().toList();
+            model.addAttribute("carRented",ds);
+            System.out.println("CUSTOMER");
+        }else{
+            System.out.println("CHUA CO CUSTOMER");
+        }
         return "customerRental";
     }
 
@@ -105,23 +120,19 @@ public class HomeController {
 //    }
 
     @PostMapping({"/customer/rent-car"})
-    public String userRentCar(@ModelAttribute CarRental carRental, Model model, RedirectAttributes redirectAttributes){
-        // Get list for render
-//        Customer cus, Car car, Date pickupDate, Date returnDate, double rentPrice, String status
-        System.out.println("carRental: "+ carRental.toString());
-        CarRental cr = new CarRental();
-//        CarRental carRental = iCarRentalService.update();
+    public String userRentCar(@ModelAttribute CarRental carRental, Model model, RedirectAttributes redirectAttributes, HttpServletRequest request){
 
+        HttpSession session = request.getSession();
+        Customer cus = (Customer) session.getAttribute("user");
+        if( cus == null){
+            redirectAttributes.addFlashAttribute("err", "Please sign in to continue");
+        }else {
+           iCarRentalService.update(carRental);
+            redirectAttributes.addFlashAttribute("err", "Add CarRental Successfully");
+        }
 
-//        if(carRental == null){
-//            System.out.println("NULL CAR-RENTAL");
-        List<Car> carList = iCarService.getAll();
-//        model.addAttribute("cars",carList);
-//            model.addAttribute("err", "CarRental Not Found");
-        redirectAttributes.addFlashAttribute("err", "CarRental Not Found");
-//        }else{
-//            model.addAttribute("carRental", carRental);
-//        }
+//        System.out.println("::: "+ carRental.toString())
+
         return "redirect:/car";
     }
     

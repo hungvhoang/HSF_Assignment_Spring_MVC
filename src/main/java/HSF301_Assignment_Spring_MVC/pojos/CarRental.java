@@ -56,4 +56,21 @@ public class CarRental {
         this.rentPrice = rentPrice;
         this.status = status;
     }
+
+    public Date getCurrentDate(){
+        return new Date();
+    }
+
+    @Override
+    public String toString() {
+        return "CarRental{" +
+                "id=" + id +
+                ", car=" + car +
+                ", customer=" + customer +
+                ", pickupDate=" + pickupDate +
+                ", returnDate=" + returnDate +
+                ", rentPrice=" + rentPrice +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }
