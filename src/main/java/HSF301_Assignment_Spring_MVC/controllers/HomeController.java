@@ -2,10 +2,14 @@ package HSF301_Assignment_Spring_MVC.controllers;
 
 import HSF301_Assignment_Spring_MVC.pojos.Car;
 import HSF301_Assignment_Spring_MVC.pojos.CarRental;
+import HSF301_Assignment_Spring_MVC.pojos.Customer;
 import HSF301_Assignment_Spring_MVC.pojos.request.CarRentalRequest;
 import HSF301_Assignment_Spring_MVC.pojos.request.LoginRequest;
 import HSF301_Assignment_Spring_MVC.services.ICarRentalService;
 import HSF301_Assignment_Spring_MVC.services.ICarService;
+import HSF301_Assignment_Spring_MVC.services.ICustomerService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,24 +23,26 @@ import java.util.List;
 public class HomeController {
     private final ICarService iCarService;
     private final ICarRentalService iCarRentalService;
+    private final ICustomerService iCustomerService;
 
     @Autowired
-    public HomeController(ICarService iCarService, ICarRentalService iCarRentalService) {
+    public HomeController(ICarService iCarService, ICarRentalService iCarRentalService,ICustomerService iCustomerService) {
         this.iCarService = iCarService;
+        this.iCustomerService = iCustomerService;
         this.iCarRentalService = iCarRentalService;
     }
 
-    @GetMapping()
-    public String defaultRoot() {
-        return "redirect:/index";
-    }
+//    @GetMapping()
+//    public String defaultRoot() {
+//        return "redirect:/index";
+//    }
 
-    @GetMapping("/index")
-    public String defaultScreen(Model model){
-        List<Car> carList = iCarService.getAll();
-        model.addAttribute("cars",carList);
-        return "index";
-    }
+//    @GetMapping("/index")
+//    public String defaultScreen(Model model){
+//        List<Car> carList = iCarService.getAll();
+//        model.addAttribute("cars",carList);
+//        return "index";
+//    }
 
     @GetMapping({"/login"})
     public String loginView(Model model) {
@@ -45,16 +51,25 @@ public class HomeController {
         return "login";
     }
 
-    @GetMapping({"/about"})
-    public String aboutView(Model model){
-//        model.addAttribute()
-        return "about";
+    @GetMapping("/carRented")
+    public String showCarRented(HttpServletRequest request,Model model){
+        HttpSession session = request.getSession();
+        Customer customer =(Customer) session.getAttribute("user");
+        List<CarRental> ds = customer.getCarRentalList().stream().toList();
+        model.addAttribute("carRented",ds);
+        return "customerRental";
     }
 
-    @GetMapping({"/home"})
-    public String homeView(Model model){
-        return "index";
-    }
+//    @GetMapping({"/about"})
+//    public String aboutView(Model model){
+////        model.addAttribute()
+//        return "about";
+//    }
+
+//    @GetMapping({"/home"})
+//    public String homeView(Model model){
+//        return "index";
+//    }
 
     @GetMapping({"/car"})
     public String carView(Model model){
@@ -77,15 +92,15 @@ public class HomeController {
 //        return "car-single";
 //    }
 
-    @GetMapping({"/pricing"})
-    public String pricingView(Model model){
-        return "pricing";
-    }
-
-    @GetMapping({"/blog"}) //Lam` canh?
-    public String blogView(Model model){
-        return "blog";
-    }
+//    @GetMapping({"/pricing"})
+//    public String pricingView(Model model){
+//        return "pricing";
+//    }
+//
+//    @GetMapping({"/blog"}) //Lam` canh?
+//    public String blogView(Model model){
+//        return "blog";
+//    }
 
     @PostMapping({"/customer/rent-car"})
     public String userRentCar(Model model, @ModelAttribute CarRentalRequest crr){

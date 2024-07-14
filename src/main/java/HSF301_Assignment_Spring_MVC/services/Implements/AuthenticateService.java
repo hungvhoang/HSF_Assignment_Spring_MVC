@@ -1,8 +1,10 @@
 package HSF301_Assignment_Spring_MVC.services.Implements;
 
 import HSF301_Assignment_Spring_MVC.pojos.Account;
+import HSF301_Assignment_Spring_MVC.pojos.Customer;
 import HSF301_Assignment_Spring_MVC.pojos.request.LoginRequest;
 import HSF301_Assignment_Spring_MVC.repositories.AccountRepository;
+import HSF301_Assignment_Spring_MVC.repositories.CustomerRepository;
 import HSF301_Assignment_Spring_MVC.services.IAuthenticateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,30 +15,24 @@ public class AuthenticateService implements IAuthenticateService {
 
     private final AccountRepository accountRepository;
 
+    private CustomerRepository customerRepository;
+
     @Autowired
-    public AuthenticateService(AccountRepository accountRepository) {
+    public AuthenticateService(AccountRepository accountRepository, CustomerRepository customerRepository) {
         this.accountRepository = accountRepository;
+        this.customerRepository = customerRepository;
     }
 
 
     @Override
-    public String Login(LoginRequest loginRequest, Model model) {
-        Account dbaccount = accountRepository.getAccountByUserName(loginRequest.getUsername());
-        if (
-                loginRequest.getPassword() != null
-                        && loginRequest.getUsername() != null
-        ) {
-            if (dbaccount == null) {
-//                System.out.println("NULL ROI CON");
-                model.addAttribute("loggingMessage","not found");
-                return "login";
-            } else if (loginRequest.getPassword().matches(dbaccount.getCustomer().getPassword())) {
-//                model.addAttribute("loggingMessage","YEEEE");
-                return "about";
-            }
+    public Customer login(LoginRequest loginRequest, Model model) {
+        try {
+            Customer customer = customerRepository.findByEmailAndPassword(loginRequest.getUsername(), loginRequest.getPassword());
+            return customer;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
         }
-        return null;
-
     }
 
 
