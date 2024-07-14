@@ -94,6 +94,24 @@ public class AdminController {
         model.addAttribute("review", reviews);
         return "review";
     }
+
+    @PostMapping("/review")
+    public String deleteReview(Model model, @RequestBody ReviewKey id) {
+
+        if(id != null){
+            try {
+                iReviewService.delete(id);
+                model.addAttribute("notification","Delete review successfully !");
+            }catch (Exception ex){
+                System.out.println("Error: "+ex.getMessage());
+            }
+        }
+
+        List<Review> reviews = iReviewService.getAll();
+        model.addAttribute("review", reviews);
+        return "review";
+    }
+
     @GetMapping("/createCar")
     public String createNewCar(Model model){
         Car car = new Car();

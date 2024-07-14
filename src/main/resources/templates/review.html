@@ -49,6 +49,14 @@
 										<th scope="col">Car</th>
 										<th scope="col">Review Star</th>
 										<th scope="col">Comment</th>
+										<th scope="col">Actions</th>
+										<td>
+											<form th:action="@{/admin/review}" method="post">
+												<input type="hidden" name="customerId" th:value="${review.customer.customerID}"/>
+												<input type="hidden" name="carId" th:value="${review.car.carID}"/>
+												<button type="submit" class="btn btn-danger">Delete</button>
+											</form>
+										</td>
 									</tr>
 									</thead>
 									<tbody>
