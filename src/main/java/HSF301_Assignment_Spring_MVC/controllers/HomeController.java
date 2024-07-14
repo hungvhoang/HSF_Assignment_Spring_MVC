@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -68,7 +67,10 @@ public class HomeController {
         HttpSession session = request.getSession();
         Customer customer =(Customer) session.getAttribute("user");
         if(customer != null){
-            List<CarRental> ds = customer.getCarRentalList().stream().toList();
+            List<CarRental> ds = iCarRentalService.getAll().stream()
+                    .filter(carRental ->
+                        carRental.getCustomer().getCustomerID() == customer.getCustomerID()
+                    ).toList();
             model.addAttribute("carRented",ds);
             System.out.println("CUSTOMER");
         }else{
