@@ -1,0 +1,47 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div th:replace="cssFiles.html :: cssFiles"></div>
+    <link th:href="@{/css/createForm.css}" rel="stylesheet">
+</head>
+<body>
+<div th:replace="customerHeader.html :: cHeader"></div>
+<div class="container mt-5 mb-5">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title text-center"> Create new car</h2>
+            <form method="POST" enctype="multipart/form-data" th:action="@{/customer/review}" th:object="${review}">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="reviewStar">Rated star</label>
+                        <input type="number" class="form-control" id="reviewStar" name="reviewStar"
+                               th:field="*{reviewStar}" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="comment">Comment</label>
+                        <input type="text" class="form-control" id="comment" name="comment" th:field="*{comment}"
+                               required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="hidden" class="form-control" id="customer" name="customer"
+                               th:field="*{customer}" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="hidden" class="form-control" id="car" name="car" th:field="*{car}"
+                               required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:replace="jsFiles.html :: jsFiles"></div>
+<div th:replace="AdminFooter.html :: footer"></div>
+</body>
+</html>

@@ -30,17 +30,30 @@
                                         <th scope="col">Pickup Date</th>
                                         <th scope="col">Return Date</th>
                                         <th scope="col">Status</th>
+                                        <th scope="col">Stars</th>
+                                        <th scope="col">Review</th>
+                                        <th scope="col">Write Review</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="carRental : ${carRented}">
+                                    <tr th:each="carRental : ${carRented}"  >
                                         <td th:text="${carRental.car.carId}"></td>
                                         <td th:text="${carRental.car.carName}"></td>
                                         <td th:text="${carRental.rentPrice}"></td>
                                         <td th:text="${carRental.pickupDate}"></td>
                                         <td th:text="${carRental.returnDate}"></td>
                                         <td th:text="${carRental.status}"></td>
+                                        <td th:text="${carRental.stars}"></td>
+                                        <td th:text="${carRental.review}"></td>
+                                        <td>
+                                           <form th:action="@{/customer/review}" method="get">
+                                               <input type="hidden" name="id" th:value="${carRental.car.carId}"/>
+                                               <button type="submit" class="btn btn-danger mt-3 mb-3">Write review
+                                               </button>
+                                           </form>
+                                       </td>
                                     </tr>
+
                                     </tbody>
                                 </table>
 

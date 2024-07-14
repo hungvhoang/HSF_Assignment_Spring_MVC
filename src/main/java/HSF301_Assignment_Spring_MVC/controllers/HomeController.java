@@ -1,13 +1,12 @@
 package HSF301_Assignment_Spring_MVC.controllers;
 
-import HSF301_Assignment_Spring_MVC.pojos.Car;
-import HSF301_Assignment_Spring_MVC.pojos.CarRental;
-import HSF301_Assignment_Spring_MVC.pojos.Customer;
+import HSF301_Assignment_Spring_MVC.pojos.*;
 import HSF301_Assignment_Spring_MVC.pojos.request.CarRentalRequest;
 import HSF301_Assignment_Spring_MVC.pojos.request.LoginRequest;
 import HSF301_Assignment_Spring_MVC.services.ICarRentalService;
 import HSF301_Assignment_Spring_MVC.services.ICarService;
 import HSF301_Assignment_Spring_MVC.services.ICustomerService;
+import HSF301_Assignment_Spring_MVC.services.IReviewService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +27,14 @@ public class HomeController {
     private final ICarService iCarService;
     private final ICarRentalService iCarRentalService;
     private final ICustomerService iCustomerService;
+    private final IReviewService iReviewService;
 
     @Autowired
-    public HomeController(ICarService iCarService, ICarRentalService iCarRentalService,ICustomerService iCustomerService) {
+    public HomeController(ICarService iCarService, ICarRentalService iCarRentalService, ICustomerService iCustomerService,IReviewService iReviewService) {
         this.iCarService = iCarService;
         this.iCustomerService = iCustomerService;
         this.iCarRentalService = iCarRentalService;
+        this.iReviewService = iReviewService;
     }
 
     @GetMapping()
@@ -57,7 +58,7 @@ public class HomeController {
 
     @GetMapping({"/login"})
     public String loginView(Model model) {
-    	//Test passing props
+        //Test passing props
         model.addAttribute("loginRequest", new LoginRequest());
         return "login";
     }
@@ -91,17 +92,17 @@ public class HomeController {
 //    }
 
     @GetMapping({"/car"})
-    public String carView(Model model){
+    public String carView(Model model) {
         List<Car> carList = iCarService.getAll();
-        model.addAttribute("cars",carList);
+        model.addAttribute("cars", carList);
         model.addAttribute("carRental", new CarRental());
         return "car";
     }
 
     @GetMapping({"/carDetail/{id}"})
-    public String carDetailView(Model model, @PathVariable int id){
+    public String carDetailView(Model model, @PathVariable int id) {
         Car car = iCarService.findByID(id);
-        model.addAttribute("car",car);
+        model.addAttribute("car", car);
         return "car-single";
     }
 
@@ -123,9 +124,9 @@ public class HomeController {
 //    }
 
     @GetMapping("/car/book/{carId}")
-    public String selectedCar (Model model,
-            @PathVariable int carId
-            ,HttpServletRequest request) {
+    public String selectedCar(Model model,
+                              @PathVariable int carId
+            , HttpServletRequest request) {
         Car car = iCarService.findByID(carId);
         HttpSession session = request.getSession();
         Customer customer = (Customer) session.getAttribute("user");
@@ -134,22 +135,25 @@ public class HomeController {
         CarRental carRental = new CarRental();
         carRental.setCar(car);
         carRental.setCustomer(customer);
-        model.addAttribute("carRental",carRental);
+        model.addAttribute("carRental", carRental);
         return "customerBookCar";
     }
 
     @PostMapping({"/customer/rent-car"})
-    public String userRentCar(@ModelAttribute CarRentalRequest carRental, Model model, RedirectAttributes redirectAttributes, HttpServletRequest request){
+    public String userRentCar(@ModelAttribute CarRentalRequest carRental, Model model, RedirectAttributes redirectAttributes, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Customer cus = (Customer) session.getAttribute("user");
-        if( cus == null){
+        if (cus == null) {
             redirectAttributes.addFlashAttribute("err", "Please sign in to continue");
-        }else {
+        } else {
             CarRental entity = carRental.toCarRental();
-            double price = (entity.getReturnDate().getTime() - entity.getPickupDate().getTime())* entity.getCar().getRentPrice();
+            double price = (entity.getReturnDate().getTime() - entity.getPickupDate().getTime()) * entity.getCar().getRentPrice();
+            if (price == 0) {
+                price = entity.getCar().getRentPrice();
+            }
             entity.setStatus("ok");
             entity.setRentPrice(price);
-           iCarRentalService.update(entity);
+            iCarRentalService.update(entity);
             redirectAttributes.addFlashAttribute("err", "Add CarRental Successfully");
         }
 
@@ -159,5 +163,24 @@ public class HomeController {
     }
 
 
-    
+    @GetMapping("/customer/review")
+    public String loadDataForReview(Model model,
+                                    @RequestParam int id, HttpServletRequest request) {
+        Review review = new Review();
+        HttpSession session = request.getSession();
+        Car car = iCarService.findByID(id);
+        Customer customer =(Customer) session.getAttribute("user");
+        review.setCar(car);
+        review.setCustomer(customer);
+        model.addAttribute("review",review);
+        return "customerWriteReview";
+    }
+
+    @PostMapping("/customer/review")
+    public String createReview(@ModelAttribute Review review){
+        review.setId(new ReviewKey(review.getCustomer().getCustomerID(),review.getCar().getCarId()));
+        iReviewService.save(review);
+        return "redirect:/carRented";
+    }
+
 }

@@ -12,6 +12,9 @@ import jakarta.persistence.TemporalType;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Entity
 @Table(name = "CAR_RENTAL")
@@ -72,5 +75,39 @@ public class CarRental {
                 ", rentPrice=" + rentPrice +
                 ", status='" + status + '\'' +
                 '}';
+    }
+
+    public String getReview() {
+        if(this.car != null) {
+            if(!this.car.getCarReviewList().isEmpty()) {
+                List<Review> listReview = car.getCarReviewList().stream().toList();
+                AtomicReference<String> star = new AtomicReference<String>("");
+                listReview.forEach(row -> {
+                    if(row.getCustomer().getCustomerID() == this.customer.getCustomerID()) {
+                        star.set(row.getComment());
+                    }
+                });
+                return star.get();
+            }
+            return "";
+        }
+        return "";
+    }
+
+    public Integer getStars() {
+        if(this.car != null) {
+            if(!this.car.getCarReviewList().isEmpty()) {
+                List<Review> listReview = car.getCarReviewList().stream().toList();
+                AtomicInteger star = new AtomicInteger(0);
+                listReview.forEach(row -> {
+                    if(row.getCustomer().getCustomerID() == this.customer.getCustomerID()) {
+                        star.set(row.getReviewStar());
+                    }
+                });
+                return star.get();
+            }
+            return 0;
+        }
+        return 0;
     }
 }
