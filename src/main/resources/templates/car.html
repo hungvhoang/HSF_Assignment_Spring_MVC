@@ -32,7 +32,7 @@
             <th:block th:each="car : ${cars}">
                 <div class="col-md-4">
                     <div class="car-wrap rounded ftco-animate">
-                        <div class="img rounded d-flex align-items-end">
+                        <div class="img rounded d-flex align-items-end"  th:style="'background-image: url(' + ${car.imgLink} + ');'">
                         </div>
                         <div class="text">
                             <h2 class="mb-0"><a href="car-single.html" th:text="${car.carName}"></a></h2>
