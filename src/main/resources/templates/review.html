@@ -23,8 +23,8 @@
 
 	<style>
 		.intro {
-			height: 100%;
-		}
+            height: 100%;
+        }
 	</style>
 </head>
 
@@ -40,6 +40,7 @@
 					<div class="row justify-content-center">
 						<div class="col-12">
 							<h2>All reviews</h2>
+							<h3 th:text="${notification}"></h3>
 							<div class="table-responsive bg-white">
 								<table class="table mb-0">
 									<thead>
@@ -50,22 +51,22 @@
 										<th scope="col">Review Star</th>
 										<th scope="col">Comment</th>
 										<th scope="col">Actions</th>
-										<td>
-											<form th:action="@{/admin/review}" method="post">
-												<input type="hidden" name="customerId" th:value="${review.customer.customerID}"/>
-												<input type="hidden" name="carId" th:value="${review.car.carID}"/>
-												<button type="submit" class="btn btn-danger">Delete</button>
-											</form>
-										</td>
 									</tr>
 									</thead>
 									<tbody>
-									<tr th:each="review : ${review}">
+									<tr th:each="review : ${reviews}">
 										<th scope="row" th:style="'color: #666666;'" th:text="${review.customer.customerID}"></th>
 										<td th:text="${review.customer.customerName}"></td>
 										<td th:text="${review.car.carName}"></td>
 										<td th:text="${review.reviewStar}"></td>
 										<td th:text="${review.comment}"></td>
+										<td>
+											<form th:action="@{/admin/review}" method="post">
+												<input type="hidden" name="customerId" th:value="${review.customer.customerID}"/>
+												<input type="hidden" name="carId" th:value="${review.car.carId}"/> <!-- Ensure the property name matches here -->
+												<button type="submit" class="btn btn-danger">Delete</button>
+											</form>
+										</td>
 									</tr>
 									</tbody>
 								</table>
@@ -83,8 +84,8 @@
 <!-- loader -->
 <div id="ftco-loader" class="show fullscreen">
 	<svg class="circular" width="48px" height="48px">
-		<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-		<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+		<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+		<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/>
 	</svg>
 </div>
 

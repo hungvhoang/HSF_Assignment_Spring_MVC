@@ -9,6 +9,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class ReviewKey implements Serializable {
     @Column(name = "CustomerID")
     private int customerId;

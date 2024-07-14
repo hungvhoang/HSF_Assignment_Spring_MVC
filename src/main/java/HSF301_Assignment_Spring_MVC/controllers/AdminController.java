@@ -91,12 +91,12 @@ public class AdminController {
     @GetMapping("/review")
     public String getReview(Model model){
         List<Review> reviews = iReviewService.getAll();
-        model.addAttribute("review", reviews);
+        model.addAttribute("reviews", reviews);
         return "review";
     }
 
     @PostMapping("/review")
-    public String deleteReview(Model model, @RequestBody ReviewKey id) {
+    public String deleteReview(Model model, @ModelAttribute ReviewKey id) {
 
         if(id != null){
             try {
@@ -108,7 +108,7 @@ public class AdminController {
         }
 
         List<Review> reviews = iReviewService.getAll();
-        model.addAttribute("review", reviews);
+        model.addAttribute("reviews", reviews);
         return "review";
     }
 
