@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Entity
@@ -28,6 +29,7 @@ public class Category {
 	private int categoryID;
 
 	@Column(name = "CategoryName", nullable = false)
+	@NotBlank(message = "Category name can not be empty")
 	private String categoryName;
 
 	@OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)

@@ -8,6 +8,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Entity
@@ -24,9 +27,12 @@ public class Account {
     private int accountID;
 
     @Column(name = "AccountName")
+    @Size(max = 30)
+    @NotNull(message = "Account name can not be empty")
     private String accountName;
 
     @Column(name = "Role")
+    @NotBlank(message = "Role is mandatory")
     private String role;
 
     @OneToOne(mappedBy = "account", fetch = FetchType.EAGER, orphanRemoval = true)

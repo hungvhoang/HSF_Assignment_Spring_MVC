@@ -2,6 +2,7 @@ package HSF301_Assignment_Spring_MVC.pojos;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.io.Serializable;

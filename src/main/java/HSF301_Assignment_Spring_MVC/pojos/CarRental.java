@@ -9,6 +9,10 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.Date;
@@ -37,17 +41,23 @@ public class CarRental {
     private Customer customer;
 
     @Column(name = "PickupDate", nullable = false)
+    @NotNull(message = "Pickup date must be specified")
     @Temporal(TemporalType.DATE)
     private Date pickupDate;
 
     @Column(name = "ReturnDate")
+    @NotNull(message = "Return date must be specified")
     @Temporal(TemporalType.DATE)
     private Date returnDate;
 
     @Column(name = "RentPrice", nullable = false)
+    @NotNull(message = "Rent price must be specified")
+    @Positive(message = "Rent price must be a positive value")
     private double rentPrice;
 
     @Column(name = "Status", nullable = false)
+    @NotBlank(message = "Status must be specified")
+    @Size(max = 50, message = "Status should not exceed 50 characters")
     private String status;
 
     public CarRental(Customer cus, Car car, Date pickupDate, Date returnDate, double rentPrice, String status) {

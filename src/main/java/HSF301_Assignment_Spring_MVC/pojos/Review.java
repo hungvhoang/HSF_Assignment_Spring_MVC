@@ -7,6 +7,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.*;
 
 @Entity
@@ -28,6 +30,8 @@ public class Review {
     private Car car;
 
     @Column(name = "ReviewStar", nullable = false)
+    @Max(5)
+    @Min(1)
     private Integer reviewStar;
 
     @Column(name = "Comment", length = 500)
