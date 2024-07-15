@@ -80,16 +80,16 @@ public class HomeController {
         return "customerRental";
     }
 
-//    @GetMapping({"/about"})
-//    public String aboutView(Model model){
-////        model.addAttribute()
-//        return "about";
-//    }
+    @GetMapping({"/about"})
+    public String aboutView(Model model){
+//        model.addAttribute()
+        return "about";
+    }
 
-//    @GetMapping({"/home"})
-//    public String homeView(Model model){
-//        return "index";
-//    }
+    @GetMapping({"/home"})
+    public String homeView(Model model){
+        return "index";
+    }
 
     @GetMapping({"/car"})
     public String carView(Model model) {
@@ -108,20 +108,24 @@ public class HomeController {
 
 //    @GetMapping({"/carDetail"})
 //    public String carDetaView(Model model){
-////        Car car = iCarService.findByID(id);
-////        model.addAttribute("car",car);
+//        Car car = iCarService.findByID(id);
+//        model.addAttribute("car",car);
 //        return "car-single";
 //    }
 
-//    @GetMapping({"/pricing"})
-//    public String pricingView(Model model){
-//        return "pricing";
-//    }
-//
-//    @GetMapping({"/blog"}) //Lam` canh?
-//    public String blogView(Model model){
-//        return "blog";
-//    }
+    @GetMapping("/services")
+    private String serviceView(){
+        return "services";
+    }
+    @GetMapping({"/pricing"})
+    public String pricingView(Model model){
+        return "pricing";
+    }
+
+    @GetMapping({"/blog"}) //Lam` canh?
+    public String blogView(Model model){
+        return "blog";
+    }
 
     @GetMapping("/car/book/{carId}")
     public String selectedCar(Model model,
