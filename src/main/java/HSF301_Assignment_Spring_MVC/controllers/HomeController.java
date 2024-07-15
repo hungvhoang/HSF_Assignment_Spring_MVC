@@ -1,5 +1,6 @@
 package HSF301_Assignment_Spring_MVC.controllers;
 
+import HSF301_Assignment_Spring_MVC.dtos.CarPricingDTO;
 import HSF301_Assignment_Spring_MVC.pojos.*;
 import HSF301_Assignment_Spring_MVC.pojos.request.CarRentalRequest;
 import HSF301_Assignment_Spring_MVC.pojos.request.LoginRequest;
@@ -119,6 +120,10 @@ public class HomeController {
     }
     @GetMapping({"/pricing"})
     public String pricingView(Model model){
+        List<CarPricingDTO> priceList = iCarService.getAll().stream()
+                .map(CarPricingDTO::fromCar)
+                .toList();
+        model.addAttribute("priceList",priceList);
         return "pricing";
     }
 
