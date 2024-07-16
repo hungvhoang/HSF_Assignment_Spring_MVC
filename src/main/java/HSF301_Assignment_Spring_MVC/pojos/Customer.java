@@ -40,15 +40,15 @@ public class Customer {
     private Date birthday;
 
     @Column(name = "IdentityCard",updatable = true)
-    @Size(min = 9, max = 12, message = "Identity card number must be between 9 and 12 characters")
+//    @Size(min = 9, max = 12, message = "Identity card number must be between 9 and 12 characters")
     private String identityCard;
 
     @Column(name = "LicenceNumber",updatable = true)
-    @NotBlank(message = "Licence number must be filled in")
+//    @NotBlank(message = "Licence number must be filled in")
     private String licenceNumber;
 
     @Column(name = "LicenceDate",updatable = true)
-    @PastOrPresent(message = "Licence date must be in the past or present")
+//    @PastOrPresent(message = "Licence date must be in the past or present")
     @Temporal(TemporalType.DATE)
     private Date licenceDate;
 

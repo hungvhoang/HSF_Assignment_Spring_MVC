@@ -18,12 +18,12 @@ public class OriginMapping {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/oauth2/**", "/login/**", "/error").permitAll()
+                        .requestMatchers("/oauth2/**", "/login/**","/" ,"/error","/car","/pricing","/blog","/services","/about","/contact", "/css/**", "/js/**", "/images/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth2Login -> oauth2Login
                         .loginPage("/login")
-                        .defaultSuccessUrl("/car", true)
+                        .defaultSuccessUrl("/", true)
                         .failureUrl("/login?error=true")
                 )
                 .logout(logout -> logout
