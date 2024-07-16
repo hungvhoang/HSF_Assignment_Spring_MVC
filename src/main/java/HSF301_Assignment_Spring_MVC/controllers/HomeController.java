@@ -31,17 +31,14 @@ public class HomeController {
     private final IReviewService iReviewService;
 
     @Autowired
-    public HomeController(ICarService iCarService, ICarRentalService iCarRentalService, ICustomerService iCustomerService,IReviewService iReviewService) {
+    public HomeController(ICarService iCarService, ICarRentalService iCarRentalService, ICustomerService iCustomerService, IReviewService iReviewService) {
         this.iCarService = iCarService;
         this.iCustomerService = iCustomerService;
         this.iCarRentalService = iCarRentalService;
         this.iReviewService = iReviewService;
     }
 
-    @GetMapping()
-    public String defaultRoot() {
-        return "redirect:/login";
-    }
+
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -50,12 +47,12 @@ public class HomeController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
-//    @GetMapping("/index")
-//    public String defaultScreen(Model model){
-//        List<Car> carList = iCarService.getAll();
-//        model.addAttribute("cars",carList);
-//        return "index";
-//    }
+    @GetMapping()
+    public String defaultScreen(Model model){
+        List<Car> carList = iCarService.getAll();
+        model.addAttribute("cars",carList);
+        return "index";
+    }
 
     @GetMapping({"/login"})
     public String loginView(Model model) {
@@ -65,30 +62,30 @@ public class HomeController {
     }
 
     @GetMapping("/carRented")
-    public String showCarRented(HttpServletRequest request, Model model){
+    public String showCarRented(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
-        Customer customer =(Customer) session.getAttribute("user");
-        if(customer != null){
+        Customer customer = (Customer) session.getAttribute("user");
+        if (customer != null) {
             List<CarRental> ds = iCarRentalService.getAll().stream()
                     .filter(carRental ->
-                        carRental.getCustomer().getCustomerID() == customer.getCustomerID()
+                            carRental.getCustomer().getCustomerID() == customer.getCustomerID()
                     ).toList();
-            model.addAttribute("carRented",ds);
+            model.addAttribute("carRented", ds);
             System.out.println("CUSTOMER");
-        }else{
+        } else {
             System.out.println("CHUA CO CUSTOMER");
         }
         return "customerRental";
     }
 
     @GetMapping({"/about"})
-    public String aboutView(Model model){
+    public String aboutView(Model model) {
 //        model.addAttribute()
         return "about";
     }
 
     @GetMapping({"/home"})
-    public String homeView(Model model){
+    public String homeView(Model model) {
         return "index";
     }
 
@@ -139,20 +136,23 @@ public String redirectToCar(@RequestParam(value = "carName", required = false) S
     }
 
     @GetMapping("/services")
-    private String serviceView(){
+    private String serviceView() {
         return "services";
     }
+
     @GetMapping({"/pricing"})
-    public String pricingView(Model model){
+    public String pricingView(Model model) {
         List<CarPricingDTO> priceList = iCarService.getAll().stream()
                 .map(CarPricingDTO::fromCar)
                 .toList();
-        model.addAttribute("priceList",priceList);
+        model.addAttribute("priceList", priceList);
         return "pricing";
     }
 
+
+
     @GetMapping({"/blog"}) //Lam` canh?
-    public String blogView(Model model){
+    public String blogView(Model model) {
         return "blog";
     }
 
@@ -184,7 +184,7 @@ public String redirectToCar(@RequestParam(value = "carName", required = false) S
             if (price == 0) {
                 price = entity.getCar().getRentPrice();
             }
-            entity.setStatus("ok");
+            entity.setStatus("Rented !");
             entity.setRentPrice(price);
             iCarRentalService.update(entity);
             redirectAttributes.addFlashAttribute("err", "Add CarRental Successfully");
@@ -202,16 +202,16 @@ public String redirectToCar(@RequestParam(value = "carName", required = false) S
         Review review = new Review();
         HttpSession session = request.getSession();
         Car car = iCarService.findByID(id);
-        Customer customer =(Customer) session.getAttribute("user");
+        Customer customer = (Customer) session.getAttribute("user");
         review.setCar(car);
         review.setCustomer(customer);
-        model.addAttribute("review",review);
+        model.addAttribute("review", review);
         return "customerWriteReview";
     }
 
     @PostMapping("/customer/review")
-    public String createReview(@ModelAttribute Review review){
-        review.setId(new ReviewKey(review.getCustomer().getCustomerID(),review.getCar().getCarId()));
+    public String createReview(@ModelAttribute Review review) {
+        review.setId(new ReviewKey(review.getCustomer().getCustomerID(), review.getCar().getCarId()));
         iReviewService.save(review);
         return "redirect:/carRented";
     }
