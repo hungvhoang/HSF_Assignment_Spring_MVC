@@ -11,4 +11,10 @@ public interface ICarService {
     public List<Car> getAll();
     public Car findByID(int id);
     public void delete (Car car);
+    public List<Car> findByName(String name, Integer page);
+
+    public List<Car> getAllCarsByPageFilterByName(String carName, Integer page);
+
+    public int getTotalPage();
+
 }

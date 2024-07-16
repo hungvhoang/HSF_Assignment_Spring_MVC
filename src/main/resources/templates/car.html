@@ -15,11 +15,19 @@
 <section class="ftco-section bg-light">
     <div class="container">
         <h1 th:if="${err}" class="d-flex justify-content-center" th:text="${err}"></h1>
+        <div class="d-flex" style="gap: 10px">
+            <form th:action="@{/car/redirect}" th:method="get">
+                <label>Enter car name:</label>
+                <input type="text" name="carName" placeholder="Ex: Ford Everest..." th:value="${carName}"/>
+                <button type="submit" class="btn btn-success">Search</button>
+            </form>
+        </div>
         <div class="row">
             <th:block th:each="car : ${cars}">
                 <div class="col-md-4">
                     <div class="car-wrap rounded ftco-animate">
-                        <div class="img rounded d-flex align-items-end"  th:style="'background-image: url(' + ${car.imgLink} + ');'">
+                        <div class="img rounded d-flex align-items-end"
+                             th:style="'background-image: url(' + ${car.imgLink} + ');'">
                         </div>
                         <div class="text">
                             <h2 class="mb-0"><a href="car-single.html" th:text="${car.carName}"></a></h2>
@@ -28,7 +36,8 @@
                                 <p class="price ml-auto" th:text="${car.rentPrice}"><span>/day</span></p>
                             </div>
                             <p class="d-flex mb-0 d-block">
-                                <a th:href="@{/car/book/{carId}(carId=${car.carId})}" class="btn btn-primary py-2 ml-1">Book now</a>
+                                <a th:href="@{/car/book/{carId}(carId=${car.carId})}" class="btn btn-primary py-2 ml-1">Book
+                                    now</a>
                                 <a th:href="@{/carDetail/{id}(id=${car.carId})}" class="btn btn-secondary py-2 ml-1">Details</a>
                             </p>
 
@@ -41,13 +50,12 @@
             <div class="col text-center">
                 <div class="block-27">
                     <ul>
-                        <li><a href="#">&lt;</a></li>
-                        <li class="active"><span>1</span></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">&gt;</a></li>
+                        <th:block th:each="pageNumber : ${#numbers.sequence(1, totalPage)}">
+                            <li th:classappend="${pageNumber == currentPage ? 'active' : ''}">
+                                <a th:href="@{/car/redirect(page=${pageNumber}, carName=${carName})}"><span
+                                        th:text="${pageNumber}"></span></a>
+                            </li>
+                        </th:block>
                     </ul>
                 </div>
             </div>
@@ -107,6 +115,7 @@
                             <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a>
                             </li>
                         </ul>
+
                     </div>
                 </div>
             </div>

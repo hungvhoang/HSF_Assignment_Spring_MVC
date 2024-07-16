@@ -92,11 +92,42 @@ public class HomeController {
         return "index";
     }
 
+//    @GetMapping({"/car"})
+//    public String carView(Model model) {
+//        List<Car> carList = iCarService.getCarListByPage(1);
+//        model.addAttribute("cars", carList);
+//        model.addAttribute("carRental", new CarRental());
+//        return "car";
+//    }
+@GetMapping("/car/redirect")
+public String redirectToCar(@RequestParam(value = "carName", required = false) String carName,
+                            @RequestParam(value = "page", required = false) Integer page,
+                            RedirectAttributes redirectAttributes) {
+    if (carName != null) {
+        redirectAttributes.addAttribute("carName", carName);
+    }
+    if (page != null) {
+        redirectAttributes.addAttribute("page", page);
+    }
+    return "redirect:/car";
+}
     @GetMapping({"/car"})
-    public String carView(Model model) {
-        List<Car> carList = iCarService.getAll();
+    public String carView(Model model, @RequestParam(value = "carName", required = false) String carName, @RequestParam(value = "page", required = false) Integer page) {
+
+        final int itemPerPage = 6; // 6 item each page
+
+        carName = (carName == null)? "" : carName;
+        page = (page == null) ? 1: page;
+
+        List<Car> carList = iCarService.getAllCarsByPageFilterByName(carName, page);
+        int totalPage = iCarService.getTotalPage();
+
         model.addAttribute("cars", carList);
-        model.addAttribute("carRental", new CarRental());
+        model.addAttribute("carName", carName); // for displaying input
+        model.addAttribute("totalPage", totalPage); //display totalPage
+        model.addAttribute("currentPage", page); //display currentPage
+
+
         return "car";
     }
 
@@ -106,13 +137,6 @@ public class HomeController {
         model.addAttribute("car", car);
         return "car-single";
     }
-
-//    @GetMapping({"/carDetail"})
-//    public String carDetaView(Model model){
-//        Car car = iCarService.findByID(id);
-//        model.addAttribute("car",car);
-//        return "car-single";
-//    }
 
     @GetMapping("/services")
     private String serviceView(){

@@ -61,6 +61,22 @@ public class CarService implements ICarService {
     }
 
     @Override
+    public List<Car> findByName(String name, Integer page) {
+        return carRepository.findCarsByName(name);
+    }
+
+    @Override
+    public List<Car> getAllCarsByPageFilterByName(String carName, Integer page){
+        return carRepository.getAllCarsByPageFilterByName(carName, page);
+    }
+
+    @Override
+    public int getTotalPage() {
+        int totalCars = carRepository.getCarsQuantity();
+        return (int) Math.ceil((double) totalCars / 6.0);
+    }
+
+    @Override
     public Car findByID(int id) {
         return carRepository.getReferenceById(id);
     }
