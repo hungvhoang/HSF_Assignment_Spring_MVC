@@ -23,7 +23,7 @@ public class OriginMapping {
                 )
                 .oauth2Login(oauth2Login -> oauth2Login
                         .loginPage("/login")
-                        .defaultSuccessUrl("/", true)
+                        .defaultSuccessUrl("/auth/authensuccess", true)
                         .failureUrl("/login?error=true")
                 )
                 .logout(logout -> logout

@@ -19,8 +19,21 @@ public class PriceRate {
     private String currencyUnit;
     private String surcharge;
 
-    public static PriceRate getRate(double unitPrice, int hour, String currencyUnit, String surcharge) {
+    public static PriceRate getRate(double unitPrice, double hour, String currencyUnit, String surcharge) {
         double calculatedPrice = unitPrice * hour;
+        BigDecimal roundedPrice = new BigDecimal(calculatedPrice).setScale(2, RoundingMode.UP);
+        String formattedPrice = formatPrice(roundedPrice.doubleValue());
+
+        return new PriceRate(
+                roundedPrice.doubleValue(),
+                formattedPrice,
+                currencyUnit,
+                surcharge
+        );
+    }
+
+    public static PriceRate getRate(double unitPrice, double hour, String currencyUnit, String surcharge, double discountRate) {
+        double calculatedPrice = (unitPrice * hour) - (unitPrice * hour* discountRate);
         BigDecimal roundedPrice = new BigDecimal(calculatedPrice).setScale(2, RoundingMode.UP);
         String formattedPrice = formatPrice(roundedPrice.doubleValue());
 

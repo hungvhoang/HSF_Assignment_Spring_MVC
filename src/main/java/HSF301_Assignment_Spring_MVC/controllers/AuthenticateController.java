@@ -27,17 +27,18 @@ public class AuthenticateController {
         this.customerRepository = customerRepository;
     }
 
-    @GetMapping("/oauth2/callback/google")
-    public String googleLoginCallback(HttpServletRequest request, OAuth2User oAuth2User) {
-
+    @GetMapping("/authensuccess")
+    public String googleLoginCallback(HttpServletRequest request, Authentication authentication) {
+        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
         String email = oAuth2User.getAttribute("email");
         String name = oAuth2User.getAttribute("name");
         Customer customer = customerRepository.findByEmail(email);
         HttpSession session = request.getSession();
         session.setAttribute("email", email);
         session.setAttribute("name", name);
-        session.setAttribute("user",customer);
-        return "redirect:/home";
+        session.setAttribute("user", customer);
+        System.out.println("Customer: " + customer);
+        return "redirect:/";
     }
     @PostMapping("/login")
     public String loginStudent(@ModelAttribute LoginRequest loginRequest, Model model, HttpServletRequest request) {

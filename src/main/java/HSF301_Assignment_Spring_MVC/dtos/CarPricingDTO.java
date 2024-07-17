@@ -12,16 +12,14 @@ import java.time.Month;
 @AllArgsConstructor
 public class CarPricingDTO {
     private Car car;
-    private PriceRate eightHourRate;
     private PriceRate dateRate;
     private PriceRate monthRate;
 
     public static CarPricingDTO fromCar(Car car) {
         return new CarPricingDTO(
                 car,
-                PriceRate.getRate(car.getRentPrice(),8,"$","$3/hour fuel surcharges"),
-                PriceRate.getRate(car.getRentPrice(),24,"$","$3/hour fuel surcharges"),
-                PriceRate.getRate(car.getRentPrice(), 24*30,"$","$3/hour fuel surcharges")
+                PriceRate.getRate(car.getRentPrice(),1,"$","$3/hour fuel surcharges"),
+                PriceRate.getRate(car.getRentPrice(), 30,"$","$3/hour fuel surcharges",0.3)
         );
     }
 }

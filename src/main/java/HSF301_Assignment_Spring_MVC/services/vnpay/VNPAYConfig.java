@@ -1,17 +1,18 @@
-package HSF301_Assignment_Spring_MVC.services.config;
+package HSF301_Assignment_Spring_MVC.services.vnpay;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.context.annotation.Configuration;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-
+@Configuration
 public class VNPAYConfig {
     public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
     public static String vnp_Returnurl = "/vnpay-payment-return";
-    public static String vnp_TmnCode = "[Thông tin của bạn]"; // kiểm tra email sau
-    public static String vnp_HashSecret = "[Thông tin của bạn]"; // khi đăng ký Test
+    public static String vnp_TmnCode = "N9JENV6V";
+    public static String vnp_HashSecret = "I22MTJ6KEKVWU74H8EOS5Q3IVCS2NQAU";
     public static String vnp_apiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
 
 
